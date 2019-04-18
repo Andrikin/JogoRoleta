@@ -1,9 +1,10 @@
 # JogoRoleta
-##Jogo de Roleta (Americana/Europeia/Francesa)
 
-	Um pequeno projeto que visa desenvolver minha habilidade com Programação Orientada à Objetos.
+## Jogo de Roleta (Americana/Europeia/Francesa)
 
-	O projeto consiste na criação de um jogo de roleta, podendo ser da variante Ameriacana, Européia e Francesa.
+Um pequeno projeto que visa desenvolver minha habilidade com Programação Orientada à Objetos.
+
+O projeto consiste na criação de um jogo de roleta, podendo ser da variante Ameriacana, Européia e Francesa.
 O jogo deve ser apto a realizar:
 
 * Administrar de 1 à N jogadores na mesa;
