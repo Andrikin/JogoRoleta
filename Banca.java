@@ -1,29 +1,42 @@
 class Banca{
 	int fichasBanca;
+	// apostas com relação ao tabuleiro do jogo e ao retorno em fichas
+	// discrição dos tipos de apostas
+	final String[] apostasExternas={"vermelhos","pretos","impares","pares","19baixos","19altos","1duzia","2duzia","3duzia","1coluna","2coluna","3coluna"};
+	final String[] apostasInternas={"pleno","dividir","linha","quadrado","linhaDupla"};
 
-	public Banca(int fichas){
-		this.fichasBanca=fichas;
+	public Banca(){
+		this.fichasBanca=1000;
 	}
 
 	public definirRoleta(){}
 
-	public capturarJogador(){}
+	public capturarJogador(Jogador jogador){}
 
-	public eliminarJogador(){}
+	public eliminarJogador(Jogador jogador){}
 
-	public receberAposta(){}
+	public receberAposta(Jogador jogador){}
 	
-	public informarValorAposta(){}
+	public String informarValorAposta(Jogador jogador){
+		String valorApostado="Valor apostado pelo jogador"+jogador.getNome()+": "+jogador.getValorAposta();
+		return valorApostado;
+	}
 	
-	public informarAposta(){}
+	public String informarAposta(Jogador jogador){
+		return jogador.getAposta;	
+	}
 	
 	public rodarRoleta(){}
 	
-	public verificarResultado(){}
+	public verificarResultado(int numeroSorteado,Jogador jogador){
+	}
 	
-	public receberFichas(){}
+	public receberFichas(Jogador jogador){}
 	
-	public pagarFichas(){}
+	public pagarFichas(Jogador jogador){}
 	
-	public controlarInatividade(){}
+	public controlarInatividade(Jogador jogador){}
+
+	// não pode haver nomes iguais
+	public controlarNomes(Jogador[] jogadores){}
 }

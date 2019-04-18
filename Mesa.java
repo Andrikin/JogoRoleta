@@ -4,7 +4,7 @@ class Mesa{
 	Banca banca;
 
 	public Mesa(){
-		this.banca=new Banca(1000);
+		this.banca=new Banca();
 		this.roleta=banca.definirRoleta();
 	}
 
