@@ -1,11 +1,14 @@
+import java.util.ArrayList;
 class Mesa{
-	Jogador[] jogadores;
+	ArrayList<Jogador> jogadores;
 	Roleta roleta;
 	Banca banca;
 
-	public Mesa(){
+	// a interface ao criar a mesa precisa passar qual roleta como parâmetro
+	public Mesa(String roleta){
 		this.banca=new Banca();
-		this.roleta=banca.definirRoleta();
+		this.roleta=new Roleta(roleta);
+		this.jogadores=new ArrayList<Jogador>();
 	}
 
 	// o jogo acontece aqui. Descreverá as relações entre jogadores e banca, chegando ao fim quando não tiver mais jogadores no array.

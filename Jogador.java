@@ -39,6 +39,10 @@ class Jogador{
 		this.inatividade++;
 	}
 
+	public void diminuirInatividade(){
+		this.inatividade=0;
+	}
+
 	// valor apostado na rodada
 	public void setValorAposta(int valor){
 		this.valorDaAposta+=valor;
@@ -60,11 +64,12 @@ class Jogador{
 		return this.inatividade;
 	}
 
-	// retorna uma String com as apostas feitas, listando uma embaixo da outra
-	public String getAposta(){
-		String aposta="";
-		for(String apostasFeitas:this.apostas)
-			aposta+=apostasFeitas+"\n";
-		return aposta;
+	// retorna uma String com as apostas feitas
+	public ArrayList<String> getAposta(){
+//		String aposta="";
+//		for(String apostasFeitas:this.apostas)
+//			aposta+=apostasFeitas+", ";
+//		return aposta+"\b";
+		return this.apostas;
 	}
 }
