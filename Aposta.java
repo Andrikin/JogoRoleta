@@ -1,9 +1,11 @@
-abstract class Aposta{
-	String tipoDeAposta;
-	int valor;
+import java.util.ArrayList;
+interface Aposta{
 
-	public Aposta(String aposta, int valor){
-		this.tipoDeAposta=aposta;
-		this.valor=valor;
-	} 
+	public String getAposta();
+
+	public int getValor();
+
+	public int[] getNumerosDaApostaExterna();
+
+	public ArrayList<Integer> getNumerosDaApostaInterna();
 }

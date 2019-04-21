@@ -1,9 +1,14 @@
-class ApostaExterna extends Aposta{
+import java.util.ArrayList;
+class ApostaExterna implements Aposta{
+	String aposta;
+	int valor;
 	int[] numerosDaAposta;
 
 	public ApostaExterna(String aposta, int valor, int[] numerosDaAposta){
-		super(aposta,valor);
+		this.aposta=aposta;
+		this.valor=valor;
 		switch (aposta){
+			// pagamento 1 para 1
 			case "vermelhos":
 				this.numerosDaAposta=new int[]{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
 				break;
@@ -22,6 +27,7 @@ class ApostaExterna extends Aposta{
 			case "19altos":
 				this.numerosDaAposta=new int[]{19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36};
 				break;
+			// pagamento 2 para 1
 			case "1duzia":
 				this.numerosDaAposta=new int[]{1,2,3,4,5,6,7,8,9,10,11,12};
 				break;
@@ -42,8 +48,19 @@ class ApostaExterna extends Aposta{
 				break;
 		}
 
-		public int[] getNumerosDaAposta(){
+		public String getAposta(){
+			return this.aposta;
+		}
+
+		public int getValor(){
+			return this.valor;
+		}
+
+		public int[] getNumerosDaApostaExterna(){
 			return this.numerosDaAposta;
 		}
-	}
+
+		public ArrayList<Integer> getNumerosDaApostaInterna(){
+			return null;
+		}
 }

@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 class Jogador{
 	String nome;
-	ArrayList<String> apostas;
-	ArrayList<Integer> valorDasApostas;
+	ArrayList<Aposta> apostas;
 	int inatividade;
 	int fichas;
 
@@ -11,8 +10,7 @@ class Jogador{
 		this.nome=nome;
 		this.fichas=100;
 		this.inatividade=0;
-		this.valorDaAposta=0;
-		this.apostas=new ArrayList<String>();
+		this.apostas=new ArrayList<Aposta>();
 	}
 
 	public void receberFichas(int fichas){
@@ -24,13 +22,12 @@ class Jogador{
 	}
 
 	// aposta da rodada
-	public void setAposta(String aposta){
+	public void setAposta(Aposta aposta){
 		this.apostas.add(aposta);
 	}
 
 	// valor e aposta são zerados no início de uma nova rodada
 	public void zerarAposta(){
-		this.valorDasApostas.clear();
 		this.apostas.clear();
 	}
 
@@ -40,26 +37,6 @@ class Jogador{
 
 	public void diminuirInatividade(){
 		this.inatividade=0;
-	}
-
-	// valor apostado na rodada (por enquanto, o valor que vai ser apostado não pode ser maior que a
-	// quantidade de fichas que o jogador possui, caso contrário, nada é apostado)
-	public void setValorAposta(int valor){
-		if(valor<=this.fichas){
-			this.valorDasApostas.add(valor);
-			pagarFichas(valor);
-		}else{
-			this.valorDasApostas.add(0);
-			pagarFichas(0);
-		}
-	}
-
-	public ArrayList<Integer> getValorDasApostas(){
-		return this.valorDasApostas;
-	}
-
-	public void setValorDasApostas(ArrayList<Integer> valorDasApostas){
-		this.valorDasApostas=valorDasApostas;
 	}
 
 	public String getNome(){
@@ -74,11 +51,7 @@ class Jogador{
 		return this.inatividade;
 	}
 
-	public ArrayList<String> getApostas(){
-		//		String aposta="";
-		//		for(String apostasFeitas:this.apostas)
-		//			aposta+=apostasFeitas+", ";
-		//		return aposta+"\b";
+	public ArrayList<Aposta> getApostas(){
 		return this.apostas;
 	}
 }
