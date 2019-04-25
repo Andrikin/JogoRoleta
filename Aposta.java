@@ -1,11 +1,25 @@
-import java.util.ArrayList;
-interface Aposta{
+abstract class Aposta{
+	String aposta;
+	int valor;
+	int probabilidadePagamento;
+	int[] numerosDaAposta;
 
-	public String getAposta();
+	public Aposta(String aposta, int valor){
+		this.aposta=aposta;
+		this.valor=valor;
+	}
 
-	public int getValor();
+	public Aposta(String aposta, int valor, int[] numerosDaAposta){
+		this.aposta=aposta;
+		this.valor=valor;
+		this.numerosDaAposta=numerosDaAposta;
+	}
 
-	public int[] getNumerosDaApostaExterna();
+	public abstract String getAposta();
 
-	public ArrayList<Integer> getNumerosDaApostaInterna();
+	public abstract int getValor();
+
+	public abstract int[] getNumerosDaAposta();
+
+	public abstract int getProbabilidadePagamento();
 }

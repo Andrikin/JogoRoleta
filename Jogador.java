@@ -26,7 +26,7 @@ class Jogador{
 		this.apostas.add(aposta);
 	}
 
-	// valor e aposta são zerados no início de uma nova rodada
+	// caso jogador tenha ganhado na rodada, ao zerar aposta deve retornar valores apostados. Caso contrário, jogador perde estas fichas
 	public void zerarAposta(){
 		this.apostas.clear();
 	}
