@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 class Jogador{
-	String nome;
+	String nomeDoJogador;
 	ArrayList<Aposta> apostas;
 	int inatividade;
 	int fichas;
 
 	// novos jogadores começam com uma quantidade de fichas limitadas (100)
-	public Jogador(String nome){
-		this.nome=nome;
+	public Jogador(String nomeDoJogador){
+		this.nomeDoJogador=nomeDoJogador;
 		this.fichas=100;
 		this.inatividade=0;
 		this.apostas=new ArrayList<Aposta>();
@@ -26,6 +26,11 @@ class Jogador{
 		this.apostas.add(aposta);
 	}
 
+	// retorna valor da última aposta feita
+//	public String getAposta(){
+//		return this.aposta;
+//	}
+
 	// caso jogador tenha ganhado na rodada, ao zerar aposta deve retornar valores apostados. Caso contrário, jogador perde estas fichas
 	public void zerarAposta(){
 		this.apostas.clear();
@@ -40,7 +45,7 @@ class Jogador{
 	}
 
 	public String getNome(){
-		return this.nome;
+		return this.nomeDoJogador;
 	}
 
 	public int getFichas(){

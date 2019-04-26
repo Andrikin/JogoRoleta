@@ -5,19 +5,19 @@ class ApostaInterna extends Aposta{
 		super(aposta,valor,numerosDaAposta);
 		switch(aposta){
 			case "umNumero":
-				this.propabilidadePagamento=35;
+				this.probabilidadePagamento=35;
 				break;	
 			case "doisNumeros":
-				this.propabilidadePagamento=17;
+				this.probabilidadePagamento=17;
 				break;	
 			case "linha":
-				this.propabilidadePagamento=11;
+				this.probabilidadePagamento=11;
 				break;	
 			case "quadra":
-				this.propabilidadePagamento=8;
+				this.probabilidadePagamento=8;
 				break;	
 			case "duasLinhas":
-				this.propabilidadePagamento=5;
+				this.probabilidadePagamento=5;
 				break;	
 		}
 	}
@@ -35,6 +35,6 @@ class ApostaInterna extends Aposta{
 	}
 
 	public int getProbabilidadePagamento(){
-		return this.propabilidadePagamento;
+		return this.probabilidadePagamento;
 	}
 }
