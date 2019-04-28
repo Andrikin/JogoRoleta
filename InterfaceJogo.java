@@ -9,7 +9,7 @@ class InterfaceJogo{
 	}
 
 	// métodos serão declarados fora do main
-	public void telaInicial(){
+	public String telaInicial(){
 		limparTela();
 		System.out.printf("%148s","   $$$$$\\                                           $$\\                 $$$$$$$\\            $$\\            $$\\               \n");		
 		System.out.printf("%148s","   \\__$$ |                                          $$ |                $$  __$$\\           $$ |           $$ |              \n");		
@@ -24,44 +24,78 @@ class InterfaceJogo{
 		System.out.printf("%148s","                     \\______/                                                                                                \n");		
 		String mensagem="Digite ENTER para continuar";
 		exibirMensagemCentralizada(mensagem);
-		String continuar=leitor.next();
-		if(!continuar.equals(""))
-			telaInicial();
+		String continuar=leitor.nextLine();
+		return continuar;
 	}
 
-	// obtem o valor de uma opção do menu (pode ser de todas as janelas?) 
-	public int obterEscolhaDeMenu(Menu menu){
+	public String telaInicialErro(){
+		String mensagemErro="ERRO! Digite ENTER para continuar";
+		exibirMensagemCentralizada(mensagemErro);
+		String erroTelaInicial=leitor.nextLine();
+		return erroTelaInicial;
+	}
+
+	private void pularLinhas(int linhasParaPular){
+		for(int i=0;i<linhasParaPular;i++)
+			System.out.println();
+	}
+
+	private boolean desejaSairDoPrograma(){
+		boolean desejaSair=false;
+		limparTela();
+		String mensagem="Você realmente deseja sair do programa?";
+		exibirMensagemCentralizada(mensagem);
+		String[] opcoes=new String[]{"Sim","Não"};
+		Menu menu=new Menu(opcoes);
+		pularLinhas(5);
+		String resposta=opcoes[obterEscolhaDoMenu(menu)];
+		if(resposta=="Sim")
+			terminarPrograma();
+		return desejaSair;
+	}
+
+	// escolha de Roleta
+	public String getTipoDeRoleta(){
+		limparTela();
+		String qualTipoDeRoleta="Qual ROLETA você deseja jogar?";
+		exibirMensagemCentralizada(qualTipoDeRoleta);
+		pularLinhas(5);
+		// opções para escolha de Roleta
+		String[] opcoes=new String[]{"Americana","Europeia","Francesa","Fechar Programa"};
+		Menu menu=new Menu(opcoes);
+		String opcaoEscolhida=opcoes[obterEscolhaDoMenu(menu)];
+		while(opcaoEscolhida=="Fechar Programa")
+			if(!desejaSairDoPrograma()){
+				limparTela();
+				exibirMensagemCentralizada(qualTipoDeRoleta);
+				pularLinhas(5);
+				opcaoEscolhida=opcoes[obterEscolhaDoMenu(menu)];
+			}
+		return opcaoEscolhida;
+	}
+
+	// obtem o valor de uma opção do menu (método questiona valores inválidos)
+	public int obterEscolhaDoMenu(Menu menu){
+		for(String opcao:menu.getOpcoes())
+			exibirMensagemCentralizada(opcao);
 		int escolhaDoJogador=leitor.nextInt();
 		boolean valorValido=false;
 		int numeroDeOpcoes=menu.getNumeroDeOpcoes();
 		while(!valorValido){
-			if(escolhaDoJogador<1&&escolhaDoJogador>numeroDeOpcoes){
+			if(escolhaDoJogador<1||escolhaDoJogador>numeroDeOpcoes){
 				limparTela();
-				String mensagemErro="ERRO! DIGITE VALOR VÁLIDO!";
+				String mensagemErro="ERRO! Digite uma das opções:";
 				exibirMensagemCentralizada(mensagemErro);
+				pularLinhas(5);
 				for(String opcao:menu.getOpcoes())
 					exibirMensagemCentralizada(opcao);
-			}else
+				escolhaDoJogador=leitor.nextInt();
+			}else{
 				valorValido=true;
+			}
 		}
-		return escolhaDoJogador;
+		return escolhaDoJogador-1;
 	} 
-
-	// terão que ter vários tipos de opções para diferentes tipos de menus
-	public void opcoesDoMenu(int escolhaDoJogador, Mesa mesa){
-		switch(escolhaDoJogador){
-			case 1:
-				String novoJogador=novoJogador();
-				while(mesa.buscarNomeRepetido(novoJogador))
-					novoJogador=novoJogadorErro();
-				Jogador jogador=new Jogador(novoJogador);
-				mesa.adicionarJogador(jogador);
-				break;
-			case 2:
-				terminarPrograma();
-				break;
-		}
-	}
 
 	private void exibirMensagemCentralizada(String palavra){
 		int posicao=84+(palavra.length()/2); 
@@ -119,7 +153,7 @@ class InterfaceJogo{
 		for(int i=0;i<12;i++)
 			System.out.println();
 		exibirMensagemCentralizada(perguntarJogador);
-		String nome=leitor.next();
+		String nome=leitor.nextLine();
 		return nome;
 	}
 
@@ -130,7 +164,7 @@ class InterfaceJogo{
 		for(int i=0;i<12;i++)
 			System.out.println();
 		exibirMensagemCentralizada(perguntarJogador);
-		String nome=leitor.next();
+		String nome=leitor.nextLine();
 		return nome;
 	}
 
@@ -146,13 +180,6 @@ class InterfaceJogo{
 
 	public void exibirTelaInicialComJogador(Roleta roleta){
 
-	}
-
-	// TERMINAR MÉTODO!
-	public String getTipoDeRoleta(){
-		String tipoDeRoleta="";
-
-		return tipoDeRoleta;
 	}
 
 	// move o cursor para o topo da tela (H) e limpa a tela inteira (2J), parece que só funciona com sistemas Linux
