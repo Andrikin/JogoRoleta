@@ -14,10 +14,6 @@ class Menu{
 		return this.opcoes.length;
 	}
 
-//	public String getOpcao(int opcao){
-//		return this.opcoes[opcao];
-//	}
-
 	public String[] getOpcoes(){
 		return this.opcoes;
 	}
