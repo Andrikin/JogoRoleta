@@ -4,13 +4,15 @@ class Jogador{
 	ArrayList<Aposta> apostas;
 	int inatividade;
 	int fichas;
+	int posicaoNaMesa;
 
 	// novos jogadores começam com uma quantidade de fichas limitadas (100)
-	public Jogador(String nomeDoJogador){
+	public Jogador(String nomeDoJogador, int posicaoNaMesa){
 		this.nomeDoJogador=nomeDoJogador;
 		this.fichas=100;
 		this.inatividade=0;
 		this.apostas=new ArrayList<Aposta>();
+		this.posicaoNaMesa=posicaoNaMesa;
 	}
 
 	public void receberFichas(int fichas){
@@ -58,5 +60,9 @@ class Jogador{
 
 	public ArrayList<Aposta> getApostas(){
 		return this.apostas;
+	}
+
+	public int getPosicaoNaMesa(){
+		return this.posicaoNaMesa;
 	}
 }

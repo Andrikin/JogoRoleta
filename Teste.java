@@ -12,10 +12,12 @@ class Teste{
 			continuar=interJogo.telaInicialErro();
 
 		// escolher e criar roleta
-		Roleta roleta=new Roleta(interJogo.getTipoDeRoleta());
-		System.out.println(roleta.getRoletaEscolhida());
+		Roleta roleta=new Roleta(interJogo.telaGetTipoDeRoleta());
+
 		// primeiro menu
-		//interJogo.menuInicial(mesa);
-		
+		boolean jogoRodando=true;
+		while(jogoRodando){
+			interJogo.telaMenuPrincipal(roleta, mesa);
+		}
 	}
 }

@@ -31,14 +31,22 @@ class Mesa{
 	// busca por nome igual de Jogador dentro do array
 	public boolean buscarNomeRepetido(String nomeDoJogador){
 		int jogadorNoArray=0;
-		int numeroDeJogadores=this.jogadores.size();
+		int numeroDeJogadores=getNumeroDeJogadores();
 		boolean nomeRepetido=false;
 		while(!nomeRepetido&&jogadorNoArray<numeroDeJogadores)
-			if(nomeDoJogador!=this.jogadores.get(jogadorNoArray).getNome())
+			if(!nomeDoJogador.equals(this.jogadores.get(jogadorNoArray).getNome())){
 				jogadorNoArray++;
-			else
+			}else{
 				nomeRepetido=true;
+			}
 		return nomeRepetido;
 	}
 
+	public int getNumeroDeJogadores(){
+		return this.jogadores.size();
+	}
+
+	public ArrayList<Jogador> getJogadores(){
+		return this.jogadores;
+	}
 }
