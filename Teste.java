@@ -5,19 +5,28 @@ class Teste{
 		Mesa mesa=new Mesa();
 		Banca banca=new Banca();
 
-		// jogo
+		// primeira tela (Boas Vindas)
 		String continuar=interJogo.telaInicial();
 		while(!continuar.equals(""))
 			// módulo de erro para tela inicial
 			continuar=interJogo.telaInicialErro();
 
-		// escolher e criar roleta
+		// segunda tela, escolher e criar roleta
 		Roleta roleta=new Roleta(interJogo.telaGetTipoDeRoleta());
 
-		// primeiro menu
+		// pre tela menu principal
+		interJogo.preTelaMenuPrincipal(roleta,mesa);
+
+		// tela menu principal
 		boolean jogoRodando=true;
+		boolean sairMenuPrincipal=false;
 		while(jogoRodando){
-			interJogo.telaMenuPrincipal(roleta, mesa);
+			while(!sairMenuPrincipal)
+				sairMenuPrincipal=interJogo.telaMenuPrincipal(roleta, mesa);
+			int numeroSorteado=interJogo.girarRoleta(roleta);
+			interJogo.telaVerificacaoApostas(banca, mesa, numeroSorteado);
+			sairMenuPrincipal=false;
 		}
+		System.out.println("Mesa sem jogadores! Terminando Jogo!");
 	}
 }
