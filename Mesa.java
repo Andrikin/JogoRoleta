@@ -49,4 +49,21 @@ class Mesa{
 	public ArrayList<Jogador> getJogadores(){
 		return this.jogadores;
 	}
+
+	public void setJogadores(ArrayList<Jogador> jogadores){
+		this.jogadores=jogadores;
+	}
+
+	public int getPosicaoJogadorNaMesa(String nomeDoJogador){
+		int posicaoJogador=0;
+		int numeroDeJogadores=getNumeroDeJogadores();
+		boolean nomeRepetido=false;
+		while(!nomeRepetido&&posicaoJogador<numeroDeJogadores)
+			if(!nomeDoJogador.equals(this.jogadores.get(posicaoJogador).getNome())){
+				posicaoJogador++;
+			}else{
+				nomeRepetido=true;
+			}
+		return posicaoJogador;
+	}
 }
