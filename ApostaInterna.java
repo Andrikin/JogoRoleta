@@ -1,3 +1,4 @@
+// Aposta Interna se caracteriza por ter que escolher números cobertos
 class ApostaInterna extends Aposta{
 
 	// quando é criada uma aposta interna, a interface passa os números da aposta

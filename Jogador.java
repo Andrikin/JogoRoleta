@@ -4,23 +4,26 @@ class Jogador{
 	ArrayList<Aposta> apostas;
 	int inatividade;
 	int fichas;
-	int posicaoNaMesa;
 
 	// novos jogadores começam com uma quantidade de fichas limitadas (100)
-	public Jogador(String nomeDoJogador, int posicaoNaMesa){
+	public Jogador(String nomeDoJogador){
 		this.nomeDoJogador=nomeDoJogador;
 		this.fichas=100;
 		this.inatividade=0;
 		this.apostas=new ArrayList<Aposta>();
-		this.posicaoNaMesa=posicaoNaMesa;
 	}
 
 	public void receberFichas(int fichas){
 		this.fichas+=fichas;
 	}
 
-	public void pagarFichas(int fichas){
-		this.fichas-=fichas;
+	public boolean pagarFichas(int fichas){
+		boolean possuiFichas=false;
+		if(fichas<=this.fichas){
+			this.fichas-=fichas;
+			possuiFichas=true;
+		}
+		return possuiFichas;
 	}
 
 	// aposta da rodada
@@ -29,9 +32,9 @@ class Jogador{
 	}
 
 	// retorna valor da última aposta feita
-//	public String getAposta(){
-//		return this.aposta;
-//	}
+	//	public String getAposta(){
+	//		return this.aposta;
+	//	}
 
 	// caso jogador tenha ganhado na rodada, ao zerar aposta deve retornar valores apostados. Caso contrário, jogador perde estas fichas
 	public void zerarAposta(){
@@ -42,7 +45,7 @@ class Jogador{
 		this.inatividade++;
 	}
 
-	public void diminuirInatividade(){
+	public void zerarInatividade(){
 		this.inatividade=0;
 	}
 
@@ -62,7 +65,7 @@ class Jogador{
 		return this.apostas;
 	}
 
-	public int getPosicaoNaMesa(){
-		return this.posicaoNaMesa;
-	}
+	//	public int getPosicaoNaMesa(){
+	//		return this.posicaoNaMesa;
+	//	}
 }
