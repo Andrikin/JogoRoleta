@@ -1,42 +1,67 @@
+import java.util.ArrayList;
 class Banca{
 	int fichasBanca;
-	// apostas com relação ao tabuleiro do jogo e ao retorno em fichas
-	// discrição dos tipos de apostas
-	final String[] apostasExternas={"vermelhos","pretos","impares","pares","19baixos","19altos","1duzia","2duzia","3duzia","1coluna","2coluna","3coluna"};
-	final String[] apostasInternas={"pleno","dividir","linha","quadrado","linhaDupla"};
 
 	public Banca(){
 		this.fichasBanca=1000;
 	}
 
-	public definirRoleta(){}
+	// informações para passar ao usuário
+	//	public String informarAposta(Jogador jogador){
+	//		return jogador.getAposta();	
+	//	}
 
-	public capturarJogador(Jogador jogador){}
-
-	public eliminarJogador(Jogador jogador){}
-
-	public receberAposta(Jogador jogador){}
-	
-	public String informarValorAposta(Jogador jogador){
-		String valorApostado="Valor apostado pelo jogador"+jogador.getNome()+": "+jogador.getValorAposta();
-		return valorApostado;
+	private boolean buscarNumeroArray(int[] array, int numero){
+		boolean numEncontrado=false;
+		int num=0;
+		int tamanhoArray=array.length;
+		while(!numEncontrado&&num<tamanhoArray)
+			if(array[num]!=numero)
+				num++;
+			else
+				numEncontrado=true;
+		return numEncontrado;
 	}
-	
-	public String informarAposta(Jogador jogador){
-		return jogador.getAposta;	
-	}
-	
-	public rodarRoleta(){}
-	
-	public verificarResultado(int numeroSorteado,Jogador jogador){
-	}
-	
-	public receberFichas(Jogador jogador){}
-	
-	public pagarFichas(Jogador jogador){}
-	
-	public controlarInatividade(Jogador jogador){}
 
-	// não pode haver nomes iguais
-	public controlarNomes(Jogador[] jogadores){}
+	// retorna um boolean. Se jogador ganhou, a Mesa deve retornar fichas apostadas. Caso contrário, Mesa entrega fichas para Banca
+	// interface controla pagamentos de Mesa
+	// int i: index para retornar aposta(i)
+	// índice é posição da aposta no array de apostas
+	public int verificarApostaJogador(Aposta aposta, int numeroSorteadoRoleta){
+		int jogadorGanhou=-1;
+		// verifico se a aposta acertou número sorteado
+		if(buscarNumeroArray(aposta.getNumerosDaAposta(),numeroSorteadoRoleta))
+			// pagamento que a Banca deve fazer ao jogador (não contando com o valor da aposta em si, que é do jogador)
+			jogadorGanhou=aposta.getValor()*aposta.getProbabilidadePagamento();
+		return jogadorGanhou;
+	}
+
+	public void receberFichas(int fichas){
+		this.fichasBanca+=fichas;
+	}
+
+	// método precisa ser melhorado
+	public boolean pagarFichas(int fichas){
+		boolean bancaPagou=false;
+		if(this.fichasBanca>=fichas){
+			this.fichasBanca-=fichas;
+			bancaPagou=true;
+		}
+		return bancaPagou;
+	}
+
+	public void controlarInatividade(Jogador jogador){
+		if(jogador.apostas.isEmpty())	
+			jogador.aumentarInatividade();
+		else
+			jogador.zerarInatividade();
+	}
+
+	public int getFichasBanca(){
+		return this.fichasBanca;
+	}
+
+	public void setFichas(int fichas){
+		this.fichasBanca=fichas;
+	}
 }
