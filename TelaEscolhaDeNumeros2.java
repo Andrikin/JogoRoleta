@@ -15,7 +15,6 @@ class TelaEscolhaDeNumeros2 implements Tela{
 
 	public int  mostrarTela(){
 		Scanner leitor=new Scanner(System.in);
-		aux.limparTela();
 		aux.mostrarTabuleiro(mesa.getTipoDeRoleta());
 		aux.pularLinhas(1);
 		aux.titulo(String.format("escolha os números da aposta interna: %s!",this.tipoDeAposta));
@@ -23,11 +22,10 @@ class TelaEscolhaDeNumeros2 implements Tela{
 		aux.exibirMensagemCentralizada("Digite um número:");
 		// está entrando qualquer número
 		int numEscolhido=leitor.nextInt();
-		if(numEscolhido<1&&numEscolhido>36){
+		if(numEscolhido<1||numEscolhido>36){
 			aux.limparTela();
 			aux.titulo("erro! digite um número entre 1 e 36");
-			aux.pressioneEnterContinuar();
-			mostrarTela();
+			numEscolhido=mostrarTela();
 		}
 		return numEscolhido;
 	}
@@ -39,16 +37,18 @@ class TelaEscolhaDeNumeros2 implements Tela{
 				this.numerosEscolhidos=new int[]{numEscolhido};
 				break;
 			case "Split":
-				this.numerosEscolhidos=aux.escolherDoisNumeros(numEscolhido, mesa);
+				this.numerosEscolhidos=aux.escolherDoisNumeros(numEscolhido, mesa, this.tipoDeAposta);
 				break;
+			// as outras apostas são limitadas, de modo que entrando com um número, os números da aposta estão escolhidos
+			// mas é preciso que entre com o número correto
 			case "Street":
-				this.numerosEscolhidos=aux.escolherLinha(numEscolhido, mesa);
+				this.numerosEscolhidos=aux.escolherLinha(numEscolhido, mesa, this.tipoDeAposta);
 				break;
 			case "Box of Four":
-				this.numerosEscolhidos=aux.escolherQuadra(numEscolhido, mesa);
+				this.numerosEscolhidos=aux.escolherQuadra(numEscolhido, mesa, this.tipoDeAposta);
 				break;
 			case "Six Line":
-				this.numerosEscolhidos=aux.escolherDuasLinhas(numEscolhido, mesa);
+				this.numerosEscolhidos=aux.escolherDuasLinhas(numEscolhido, mesa, this.tipoDeAposta);
 				break;
 			default:
 				aux.mensagemErroOpcao();
