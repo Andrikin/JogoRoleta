@@ -27,7 +27,6 @@ class TelaMenuPrincipal implements Tela{
 				mostrarJogadores(mesa.getJogadores());
 				break;
 			case 2:
-				// ArrayList é dinâmico, portanto deve ter um cuidado quando um jogador sai da mesa
 				iniciarRodada();
 				break;
 			case 3:
@@ -71,19 +70,34 @@ class TelaMenuPrincipal implements Tela{
 		}
 	}
 
+	// todos os jogadores irão jogar, até acabar a rodada
 	private void iniciarRodada(){
 		int numeroDeJogadoresNaMesa=mesa.getJogadores().size();
 		int jogadorDaVez=0;
 		while(jogadorDaVez<numeroDeJogadoresNaMesa){
-			TelaInicioDeRodada inicioDeRodada=new TelaInicioDeRodada(mesa.getJogadores().get(jogadorDaVez), mesa);
-			inicioDeRodada.definirEscolha(inicioDeRodada.mostrarTela());
+			// vez do jogador deve continuar apostando até que não queira mais
+			boolean continuar=true;
+			while(continuar!=false){
+				TelaInicioDeRodada inicioDeRodada=new TelaInicioDeRodada(mesa.getJogadores().get(jogadorDaVez), mesa);
+				inicioDeRodada.definirEscolha(inicioDeRodada.mostrarTela());
+				continuar=desejaContinuarApostando();
+			}
 			int jogadoresNaMesaAtualizado=mesa.getJogadores().size();
 			if(numeroDeJogadoresNaMesa==jogadoresNaMesaAtualizado){
 				jogadorDaVez++;
 			}else{
 				numeroDeJogadoresNaMesa=mesa.getJogadores().size();
 			}
-		System.out.println(jogadorDaVez);
 		}
+	}
+
+	private boolean desejaContinuarApostando(){
+		aux.limparTela();
+		String[] opcoes=new String[]{"Sim","Não"};
+		int opcaoEscolhida=aux.iniciarMenu("Deseja continuar apostando?",opcoes);
+		boolean continuar=true;
+		if(opcaoEscolhida!=0)
+			continuar=false;
+		return continuar;
 	}
 }
