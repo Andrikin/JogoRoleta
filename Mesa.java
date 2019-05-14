@@ -72,4 +72,8 @@ class Mesa{
 			}
 		return posicaoJogador;
 	}
+
+	public int getFichasDaMesa(){
+		return this.fichasApostadas;
+	}
 }

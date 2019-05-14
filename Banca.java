@@ -6,11 +6,6 @@ class Banca{
 		this.fichasBanca=1000;
 	}
 
-	// informações para passar ao usuário
-	//	public String informarAposta(Jogador jogador){
-	//		return jogador.getAposta();	
-	//	}
-
 	private boolean buscarNumeroArray(int[] array, int numero){
 		boolean numEncontrado=false;
 		int num=0;

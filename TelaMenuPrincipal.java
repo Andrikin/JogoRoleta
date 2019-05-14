@@ -4,11 +4,13 @@ class TelaMenuPrincipal implements Tela{
 	InterfaceAux aux;
 	Mesa mesa;
 	Roleta roleta;
+	boolean todosApostaram;
 
 	public TelaMenuPrincipal(Mesa mesa, Roleta roleta){
 		this.aux=new InterfaceAux();
 		this.mesa=mesa;
 		this.roleta=roleta;
+		this.todosApostaram=false;
 	}
 
 	public int mostrarTela(){
@@ -27,7 +29,13 @@ class TelaMenuPrincipal implements Tela{
 				mostrarJogadores(mesa.getJogadores());
 				break;
 			case 2:
-				iniciarRodada();
+				if(mesa.getNumeroDeJogadores()!=0)
+					iniciarRodada();
+				else{
+					aux.limparTela();
+					aux.titulo("mesa sem jogadores");
+					aux.pressioneEnterContinuar();
+				}
 				break;
 			case 3:
 				aux.terminarPrograma();
@@ -72,23 +80,28 @@ class TelaMenuPrincipal implements Tela{
 
 	// todos os jogadores irão jogar, até acabar a rodada
 	private void iniciarRodada(){
-		int numeroDeJogadoresNaMesa=mesa.getJogadores().size();
+		int numeroDeJogadoresNaMesa=mesa.getNumeroDeJogadores();
 		int jogadorDaVez=0;
-		while(jogadorDaVez<numeroDeJogadoresNaMesa){
+		boolean retornarTelaMenu=false;
+		while(jogadorDaVez<numeroDeJogadoresNaMesa&&retornarTelaMenu!=true){
 			// vez do jogador deve continuar apostando até que não queira mais
 			boolean continuar=true;
 			while(continuar!=false){
+				System.out.println(jogadorDaVez);
 				TelaInicioDeRodada inicioDeRodada=new TelaInicioDeRodada(mesa.getJogadores().get(jogadorDaVez), mesa);
 				inicioDeRodada.definirEscolha(inicioDeRodada.mostrarTela());
-				continuar=desejaContinuarApostando();
+				if(!inicioDeRodada.getJogadorSaiu())
+					continuar=desejaContinuarApostando();
+				else
+					continuar=false;
 			}
-			int jogadoresNaMesaAtualizado=mesa.getJogadores().size();
-			if(numeroDeJogadoresNaMesa==jogadoresNaMesaAtualizado){
+			numeroDeJogadoresNaMesa=mesa.getNumeroDeJogadores();
+			if(numeroDeJogadoresNaMesa!=0)
 				jogadorDaVez++;
-			}else{
-				numeroDeJogadoresNaMesa=mesa.getJogadores().size();
-			}
+			else
+				retornarTelaMenu=true;
 		}
+		this.todosApostaram=true;
 	}
 
 	private boolean desejaContinuarApostando(){
@@ -99,5 +112,13 @@ class TelaMenuPrincipal implements Tela{
 		if(opcaoEscolhida!=0)
 			continuar=false;
 		return continuar;
+	}
+
+	public boolean getTodosApostaram(){
+		return this.todosApostaram;
+	}
+
+	public void setTodosApostaram(){
+		this.todosApostaram=false;
 	}
 }

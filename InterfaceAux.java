@@ -186,7 +186,7 @@ class InterfaceAux{
 	// apostas internas(necessário um método que capture o primeiro número, para então entregar os númerosEscolhidos)
 	public void apostaInterna(String tipoDeApostaInterna, Jogador jogador, Mesa mesa){
 		limparTela();
-		TelaEscolhaDeNumeros2 escolherNumeros=new TelaEscolhaDeNumeros2(tipoDeApostaInterna, mesa);
+		TelaEscolhaDeNumeros escolherNumeros=new TelaEscolhaDeNumeros(tipoDeApostaInterna, mesa);
 		int[] numerosEscolhidos=escolherNumeros.getNumerosEscolhidos();
 		mostrarNumerosDaApostaInterna(jogador, numerosEscolhidos);
 		TelaValorDaAposta valorDaAposta=new TelaValorDaAposta();
@@ -217,7 +217,7 @@ class InterfaceAux{
 
 		Scanner leitor=new Scanner(System.in);
 		limparTela();
-		telaEscolherNumeros("segundo", numEscolhido, mesa);
+		telaEscolherNumeros("segundo ", numEscolhido, mesa);
 		int segundoNumEscolhido=validandoSegundoNumero(leitor.nextInt(), numerosPossiveis, numEscolhido, mesa);
 
 		return new int[]{numEscolhido,segundoNumEscolhido};

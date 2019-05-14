@@ -2,11 +2,13 @@ class TelaInicioDeRodada implements Tela{
 	InterfaceAux aux;
 	Jogador jogadorDaVez;
 	Mesa mesa;
+	boolean jogadorSaiu;
 
 	public TelaInicioDeRodada(Jogador jogadorDaVez, Mesa mesa){
 		this.aux=new InterfaceAux();
 		this.mesa=mesa;
 		this.jogadorDaVez=jogadorDaVez;
+		this.jogadorSaiu=false;
 	}
 
 	// tela de inicio de rodada está dentro da tela do menu principal
@@ -45,22 +47,13 @@ class TelaInicioDeRodada implements Tela{
 		}
 	}
 
-	private void eliminarJogadorDaMesa(String nomeJogador){
-		int posicaoJogadorNaMesa=mesa.getPosicaoJogadorNaMesa(nomeJogador);
-		Jogador jogadorEliminado=mesa.eliminarJogador(posicaoJogadorNaMesa);
-		aux.titulo(String.format("jogador %s saiu da mesa!",jogadorEliminado.getNome()));
-		aux.pularLinhas(1);
-		aux.exibirMensagemCentralizada(String.format("%s: %d fichas",jogadorEliminado.getNome(),jogadorEliminado.getFichas()));
-		aux.pularLinhas(1);
-		aux.pressioneEnterContinuar();
-	}
-
 	private void desejaSairDaMesa(){
 		String[] opcoes=new String[]{"Sim","Não"};
 		int opcao=aux.iniciarMenu("você tem certeza que deseja sair da mesa?",opcoes);
 		switch(opcao){
 			case 0:
 				eliminarJogadorDaMesa(this.jogadorDaVez.getNome());
+				this.jogadorSaiu=true;
 				break;
 			case 1:
 				definirEscolha(mostrarTela());
@@ -70,6 +63,20 @@ class TelaInicioDeRodada implements Tela{
 				aux.titulo("erro! digite uma das opções válidas!");
 				desejaSairDaMesa();
 		}
+	}
+
+	public boolean getJogadorSaiu(){
+		return this.jogadorSaiu;
+	}
+
+	private void eliminarJogadorDaMesa(String nomeJogador){
+		int posicaoJogadorNaMesa=mesa.getPosicaoJogadorNaMesa(nomeJogador);
+		Jogador jogadorEliminado=mesa.eliminarJogador(posicaoJogadorNaMesa);
+		aux.titulo(String.format("jogador %s saiu da mesa!",jogadorEliminado.getNome()));
+		aux.pularLinhas(1);
+		aux.exibirMensagemCentralizada(String.format("%s: %d fichas",jogadorEliminado.getNome(),jogadorEliminado.getFichas()));
+		aux.pularLinhas(1);
+		aux.pressioneEnterContinuar();
 	}
 
 	private void eliminarJogadorInativo(Jogador jogador){
