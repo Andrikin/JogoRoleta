@@ -1,37 +1,43 @@
 import java.util.ArrayList;
 class Jogador{
-	String nome;
-	// jogador pode ter várias apostas
-	ArrayList<String> apostas;
+	String nomeDoJogador;
+	ArrayList<Aposta> apostas;
 	int inatividade;
 	int fichas;
-	int valorDaAposta;
 
 	// novos jogadores começam com uma quantidade de fichas limitadas (100)
-	public Jogador(String nome){
-		this.nome=nome;
+	public Jogador(String nomeDoJogador){
+		this.nomeDoJogador=nomeDoJogador;
 		this.fichas=100;
 		this.inatividade=0;
-		this.valorDaAposta=0;
-		this.apostas=new ArrayList<String>();
+		this.apostas=new ArrayList<Aposta>();
 	}
 
 	public void receberFichas(int fichas){
 		this.fichas+=fichas;
 	}
 
-	public void pagarFichas(int fichas){
-		this.fichas-=fichas;
+	public boolean pagarFichas(int fichas){
+		boolean possuiFichas=false;
+		if(fichas<=this.fichas){
+			this.fichas-=fichas;
+			possuiFichas=true;
+		}
+		return possuiFichas;
 	}
 
 	// aposta da rodada
-	public void escolherAposta(String aposta){
+	public void setAposta(Aposta aposta){
 		this.apostas.add(aposta);
 	}
 
-	// valor e aposta são zerados no início de uma nova rodada
+	// retorna valor da última aposta feita
+	//	public String getAposta(){
+	//		return this.aposta;
+	//	}
+
+	// caso jogador tenha ganhado na rodada, ao zerar aposta deve retornar valores apostados. Caso contrário, jogador perde estas fichas
 	public void zerarAposta(){
-		this.valorDaAposta=0;
 		this.apostas.clear();
 	}
 
@@ -39,17 +45,12 @@ class Jogador{
 		this.inatividade++;
 	}
 
-	// valor apostado na rodada
-	public void setValorAposta(int valor){
-		this.valorDaAposta+=valor;
-	}
-
-	public int getValorAposta(){
-		return this.valorDaAposta;
+	public void zerarInatividade(){
+		this.inatividade=0;
 	}
 
 	public String getNome(){
-		return this.nome;
+		return this.nomeDoJogador;
 	}
 
 	public int getFichas(){
@@ -60,11 +61,11 @@ class Jogador{
 		return this.inatividade;
 	}
 
-	// retorna uma String com as apostas feitas, listando uma embaixo da outra
-	public String getAposta(){
-		String aposta="";
-		for(String apostasFeitas:this.apostas)
-			aposta+=apostasFeitas+"\n";
-		return aposta;
+	public ArrayList<Aposta> getApostas(){
+		return this.apostas;
 	}
+
+	//	public int getPosicaoNaMesa(){
+	//		return this.posicaoNaMesa;
+	//	}
 }
