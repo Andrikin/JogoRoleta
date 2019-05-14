@@ -62,11 +62,6 @@ class TelaDeResultados{
 		aux.exibirMensagemCentralizada(String.format("Jogador %s ganhou %d fichas e perdeu %d fichas",jogador.getNome(),fichasGanhas,fichasPerdidas));
 	}
 
-	// calcula a particularidade da mesa francesa
-	private void resultadoMesaFrancesa(){
-
-	}
-
 	private void fichasQueSobraram(){
 		int fichasNaMesa=this.mesa.getFichasDaMesa();
 		if(fichasNaMesa!=0){
