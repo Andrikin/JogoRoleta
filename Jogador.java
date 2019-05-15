@@ -64,8 +64,4 @@ class Jogador{
 	public ArrayList<Aposta> getApostas(){
 		return this.apostas;
 	}
-
-	//	public int getPosicaoNaMesa(){
-	//		return this.posicaoNaMesa;
-	//	}
 }
