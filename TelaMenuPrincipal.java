@@ -87,7 +87,6 @@ class TelaMenuPrincipal implements Tela{
 			// vez do jogador deve continuar apostando até que não queira mais
 			boolean continuar=true;
 			while(continuar!=false){
-				System.out.println(jogadorDaVez);
 				TelaInicioDeRodada inicioDeRodada=new TelaInicioDeRodada(mesa.getJogadores().get(jogadorDaVez), mesa);
 				inicioDeRodada.definirEscolha(inicioDeRodada.mostrarTela());
 				if(!inicioDeRodada.getJogadorSaiu())
