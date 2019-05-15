@@ -35,10 +35,22 @@ class JogoDaRoleta{
 			aux.pressioneEnterContinuar();
 			// zerar as apostas desta rodada
 			ArrayList<Jogador> jogadores=mesa.getJogadores();
-			for(Jogador jogador:jogadores)
+			ArrayList<Jogador> jogadoresZeroFicha=new ArrayList<Jogador>();
+			for(Jogador jogador:jogadores){
+				if(jogador.getFichas()==0)
+					jogadoresZeroFicha.add(jogador);
 				jogador.zerarAposta();
-			// zerar tela de resultados
+			}
+			if(!jogadoresZeroFicha.isEmpty()){
+				for(Jogador jogador:jogadoresZeroFicha){
+					aux.telaJogadorEliminado(jogador, mesa);
+				}
+				aux.pularLinhas(1);
+				aux.pressioneEnterContinuar();
+			}
+			// zerar tela de resultados, jogadores com zero fichas
 			resultados=null;
+			jogadoresZeroFicha=null;
 		}
 	}
 }

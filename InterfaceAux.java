@@ -389,4 +389,11 @@ class InterfaceAux{
 		}
 		return numerosEscolhidos;
 	}
+
+	// eliminar jogador
+	public void telaJogadorEliminado(Jogador jogador, Mesa mesa){
+		int posicaoJogadorNaMesa=mesa.getPosicaoJogadorNaMesa(jogador.getNome());
+		Jogador eliminado=mesa.eliminarJogador(posicaoJogadorNaMesa);
+		titulo(String.format("Jogador %s foi eliminado da mesa por não ter mais fichas!",eliminado.getNome()));
+	}
 }
