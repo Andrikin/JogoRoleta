@@ -16,7 +16,7 @@ class TelaInicioDeRodada implements Tela{
 		aux.limparTela();
 		String nomeDoJogador=this.jogadorDaVez.getNome();
 		int fichasDoJogador=this.jogadorDaVez.getFichas();
-		String[] opcoes=new String[]{"Fazer Aposta","Finalizar Rodada","Pular Rodada","Sair da Mesa"};
+		String[] opcoes=new String[]{"Fazer Aposta","Pular Rodada","Sair da Mesa"};
 		aux.exibirMensagemCentralizada(String.format("Jogador %s possui %d fichas!",nomeDoJogador,fichasDoJogador));
 		aux.pularLinhas(1);
 		return aux.iniciarMenu(String.format("jogador %s: sua vez de apostar!",nomeDoJogador), opcoes);
@@ -30,13 +30,11 @@ class TelaInicioDeRodada implements Tela{
 				telaDeAposta.definirEscolha(telaDeAposta.mostrarTela());
 				break;
 			case 1:
-				break;
-			case 2:
 				jogadorDaVez.aumentarInatividade();
 				if(this.jogadorDaVez.getInatividade()==3)
 					eliminarJogadorInativo(this.jogadorDaVez);
 				break;
-			case 3:
+			case 2:
 				// perguntar se deseja sair
 				aux.limparTela();
 				desejaSairDaMesa();
